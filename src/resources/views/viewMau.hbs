@@ -1,0 +1,68 @@
+<h1>Xem mẫu</h1>
+<form class="row" style="max-width: none">
+    <div class="col-md-5">
+        <label for="tenMau">Tên Mẫu:</label>
+        <input type="text" id="tenMau" name="tenMau" readonly value="{{mau.name}}">
+        <br>
+        <label for="nhan">Video:</label>
+        <br>
+        <video id="uploadedVideo" controls width="100%">
+            <source src="/admin/getVideo/{{mau._id}}" type="video/mp4">
+            Trình duyệt của bạn không hỗ trợ xem video.
+        </video>
+    </div>
+    <div class="col-md-7">
+        <label for="nhan">Nhãn:</label>
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr>
+                    <th>Frame</th>
+                    <th>Nhãn</th>
+                    <th>Tọa độ trái trên</th>
+                    <th>Tọa độ phải dưới</th>
+                    <th>Tùy chọn</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each mau.data}}
+                {{#with this}}
+                {{#each data}}
+                <tr>
+                    {{#if @first}}
+                    <td rowspan="{{../data.length}}">{{../name}}</td>
+                    {{/if}}
+                    <td>{{this.name}}</td>
+                    <td>({{this.x_left}}; {{this.y_left}})</td>
+                    <td>({{this.x_right}}; {{this.y_right}})</td>
+                    {{#if @first}}
+                    <td rowspan="{{../data.length}}">
+                        <a href="/admin/viewFrame/{{../../mau._id}}/{{../_id}}" type="button" class="btn btn-info">Chi
+                            tiết</a>
+                        <a href="/admin/deleteFrame/{{../../mau._id}}/{{../_id}}" type="button"
+                            class="btn btn-danger">Xóa</a>
+
+                    </td>
+                    {{/if}}
+                </tr>
+                {{/each}}
+                {{#unless data}}
+                <tr>
+                    <td>{{name}}</td>
+                    <td colspan="3">No data available</td>
+                    <td>
+                        <a href="/admin/addLabel/{{../mau._id}}/{{this._id}}" type="button"
+                            class="btn btn-success">Thêm</a>
+                        <a href="/admin/deleteFrame/{{../mau._id}}/{{this._id}}" type="button"
+                            class="btn btn-danger">Xóa</a>
+                    </td>
+                </tr>
+                {{/unless}}
+                {{/with}}
+                {{/each}}
+
+            </tbody>
+        </table>
+        <br>
+    </div>
+
+</form>

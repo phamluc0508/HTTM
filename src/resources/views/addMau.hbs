@@ -1,0 +1,12 @@
+<h1>Thêm mẫu</h1>
+
+<form action="/admin/addMau" method="post" enctype="multipart/form-data">
+<p style="color: red;">{{error}}</p>
+    <label for="name">Tên Mẫu:</label>
+    <input type="text" id="name" name="name" required>
+    <br>
+    <label for="videoFile">Chọn tệp Video:</label>
+    <input type="file" id="videoFile" name="videoFile" accept="video/*" required>
+    <br>
+    <input type="submit" value="Tải lên" class="btn btn-success">
+</form>
